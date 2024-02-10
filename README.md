@@ -28,3 +28,12 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Документации
+- [Framer Motion](https://www.framer.com/motion/animation/)
+- [React-Transition-Group](https://reactcommunity.org/react-transition-group/)
+- [tailwind](https://tailwindcss.com/docs/installation)
+- [tanstack-query/react](https://tanstack.com/query/latest/docs/framework/react/overview)
+- [axios](https://axios-http.com/docs/intro)
+- [styled-components](https://styled-components.com/docs)
+- [RTK](https://redux-toolkit.js.org/introduction/getting-started)
