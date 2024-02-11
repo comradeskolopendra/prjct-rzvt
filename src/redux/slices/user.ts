@@ -1,26 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IUser {
-    avatar: string;
     username: string;
-    id: number | string | null;
-    name: string;
-    email: string;
-    role: "Authenticated" | "Admin" | null;
+    id: string | number | null;
 }
 
 interface IMainInitialState {
-    user: IUser
+    info: {
+        user: IUser;
+        jwt: string;
+    }
 }
 
 const initialState: IMainInitialState = {
-    user: {
-        avatar: "",
-        username: "",
-        id: null,
-        name: "",
-        email: "",
-        role: null
+    info: {
+        jwt: "",
+        user: {
+            id: null,
+            username: "",
+        }
     }
 }
 
@@ -28,17 +26,18 @@ const userSlice = createSlice({
     name: "main",
     initialState,
     selectors: {
-        getStateUser: (store) => store.user
+        getStateUser: (store) => store.info.user,
+        getStateJWT: (store) => store.info.jwt
     },
     reducers: {
-        setUserInfo(state, action: PayloadAction<IUser>) {
-            state.user = action.payload;
+        setUserInfo(state, action: PayloadAction<{ user: IUser, jwt: string }>) {
+            state.info = action.payload;
 
             return state;
         },
 
         removeUserInfo(state) {
-            state.user = initialState.user;
+            state.info = initialState.info;
 
             return state;
         }

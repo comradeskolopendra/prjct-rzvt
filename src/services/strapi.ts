@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { GetThemes } from '.';
-import { authMeGql, getThemesGql, loginGql, registerGql } from './gql';
+import { Auth, GetThemes } from '.';
+import { getThemesGql, loginGql, registerGql } from './gql';
 
 class Strapi {
 	private GRAPHQL = import.meta.env.VITE_STRAPI_GRAPHQL;
@@ -26,7 +26,7 @@ class Strapi {
 	}
 
 	async login({ identifier, password }: { identifier: string; password: string }) {
-		const { data } = await axios.post<GetThemes>(`${this.GRAPHQL}`, {
+		const { data } = await axios.post<Auth>(`${this.GRAPHQL}`, {
 			query: loginGql({ identifier, password }),
 		});
 
@@ -42,7 +42,7 @@ class Strapi {
 		email: string;
 		password: string;
 	}) {
-		const { data } = await axios.post<GetThemes>(`${this.GRAPHQL}`, {
+		const { data } = await axios.post<Auth>(`${this.GRAPHQL}`, {
 			query: registerGql({ username, email, password }),
 		});
 
