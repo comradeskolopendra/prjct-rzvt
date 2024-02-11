@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Auth, GetThemes } from '.';
-import { getThemesGql, loginGql, registerGql } from './gql';
+import { getThemesGql, loginGql, registerGql, authMeGql } from './gql';
 
 class Strapi {
 	private GRAPHQL = import.meta.env.VITE_STRAPI_GRAPHQL;
