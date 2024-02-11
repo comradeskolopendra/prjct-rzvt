@@ -51,3 +51,22 @@ export interface Pagination {
 	pageSize: number;
 	pageCount: number;
 }
+
+// auth
+export interface Auth {
+	data: Data;
+}
+
+export interface Data {
+	login: Login;
+}
+
+export interface Login {
+	jwt: string;
+	user: User;
+}
+
+export interface User {
+	id: string;
+	username: string;
+}
