@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { FC, FormEvent, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { redirect } from 'react-router';
 import styled from 'styled-components';
 import strapi from '../../../services/strapi';
@@ -97,19 +97,47 @@ const RegsiterPage: FC = () => {
 		},
 	});
 
-	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		mutate({ email: formData.email, password: formData.password, username: formData.username });
+	const handlerOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setFormData(prevState => ({
+			...prevState,
+			[event.target.name]: event.target.value,
+		}));
+	};
+
+	const handlerOnSubmit = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		mutate(formData);
 	};
 
 	return (
 		<Section>
-			<form onSubmit={submitHandler}>
-				<input
-					type='password'
-					onChange={e => setFormData({ ...formData, password: e.currentTarget.value })}
+			<Title>Регистрация</Title>
+			<Form onSubmit={handlerOnSubmit}>
+				<Input
+					type='email'
+					name='email'
+					placeholder='E-mail'
+					value={formData.email}
+					onChange={handlerOnChange}
 				/>
-			</form>
+				<Input
+					type='text'
+					name='username'
+					placeholder='Имя пользователя'
+					value={formData.username}
+					onChange={handlerOnChange}
+				/>
+				<Input
+					type='password'
+					name='password'
+					placeholder='Пароль'
+					value={formData.password}
+					onChange={handlerOnChange}
+				/>
+				<Button type='submit' disabled={isPending}>
+					Регистрация
+				</Button>
+			</Form>
 		</Section>
 	);
 };
