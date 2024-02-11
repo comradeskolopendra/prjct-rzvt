@@ -1,13 +1,26 @@
+import Header from "../components/header/header";
 import MainPage from "../pages/main/main";
 import { Route, Routes } from "react-router";
-import React from "react";
+import "../index.css";
 
 function App() {
-
   return (
-    <Routes>
-      <Route path={"/"} element={<MainPage />} />
-    </Routes>
+    <div className="app">
+      <Header links={
+        [{
+          href: "/",
+          title: "Главная"
+        },
+        {
+          href: "/home",
+          title: "Личный кабинет"
+        }
+        ]
+      } />
+      <Routes>
+        <Route path={"/"} index element={<MainPage />} />
+      </Routes>
+    </div>
   )
 }
 

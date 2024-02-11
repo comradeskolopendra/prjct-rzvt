@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+}
+
+.app {
+    background: rgb(28, 119, 44);
+    background: linear-gradient(135deg, rgba(28, 119, 44, 1) 16%, rgba(0, 13, 53, 1) 67%, rgba(0, 212, 255, 1) 100%);
+    min-height: 100vh;
+    min-width: 100vw;
+}
