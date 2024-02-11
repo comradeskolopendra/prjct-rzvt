@@ -3,7 +3,6 @@ import { Auth, GetThemes } from '.';
 import { getThemesGql, loginGql, registerGql } from './gql';
 
 class Strapi {
-	private URL = import.meta.env.VITE_STRAPI_API;
 	private GRAPHQL = import.meta.env.VITE_STRAPI_GRAPHQL;
 	private TOKEN = import.meta.env.VITE_STRAPI_DEV_TOKEN;
 
