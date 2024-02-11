@@ -1,5 +1,5 @@
 import Header from "../components/header/header";
-import { MainPage, AboutProject } from "../pages";
+import { MainPage, AboutProject, LoginPage, RegsiterPage } from "../pages";
 
 import { Route, Routes } from "react-router";
 
@@ -15,6 +15,10 @@ function App() {
 				<Routes>
 					<Route path={"/"} index element={<MainPage />} />
 					<Route path={"/about-project"} element={<AboutProject />} />
+					<Route path={"/auth"}>
+						<Route index path={"login"} element={<LoginPage />} />
+						<Route path={"register"} element={<RegsiterPage />} />
+					</Route>
 				</Routes>
 			</div>
 		</div>
