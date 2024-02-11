@@ -1,4 +1,6 @@
 import styled, { keyframes } from "styled-components";
+import statistic from "../../assets/images/statistic.png";
+import group from "../../assets/images/group.png";
 
 const AnimateSentence = keyframes`
   0% {
@@ -20,6 +22,24 @@ const AnimateSentence = keyframes`
   100% {
     width: 0%;
   }
+`
+
+const ContainerTitles = styled.div`
+  position: relative;
+`
+
+const ContainerImages = styled.div`
+  position: relative;
+  width: 50%;
+  margin-left: 50px;
+  display: flex;
+  justify-content: flex-end;
+`
+
+const SectionContents = styled.section`
+  display: flex;
+  flex-direction: row;
+  margin-top: 125px;
 `
 
 const SelectSentence = styled.span`
@@ -47,7 +67,6 @@ const TitleMain = styled.h1`
   font-size: 64px;
   font-weight: 200;
   margin-bottom: 15px;
-  margin-top: 125px;
 `
 
 const SubtitleMain = styled.p`
@@ -74,20 +93,45 @@ const SubtitleAbout = styled(SubtitleMain)`
   }
 `
 
+const ImageStatistic = styled.img`
+  position: absolute;
+  z-index: 1;
+  left: 125px;
+  top: 0;
+  width: 250px;
+  height: 250px;
+`
+
+const ImageGroup = styled.img`
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: -100px;
+  width: 350px;
+  height: 250px;
+`
+
 const MainPage = () => {
 
   return (
-    <section>
-      <TitleMain>
-        Сбер.Соц
-      </TitleMain>
-      <SubtitleMain>
-        Поделись знаниями с ближним своим!
-      </SubtitleMain>
-      <SubtitleAbout>
-        Здесь Вы можете <SelectSentence>делится</SelectSentence> образовательными ресурсами, видеороликами, анализомами и многим другим
-      </SubtitleAbout>
-    </section >
+    <SectionContents>
+      <ContainerTitles>
+        <TitleMain>
+          Сбер.Соц
+        </TitleMain>
+        <SubtitleMain>
+          Поделись знаниями с ближним своим!
+        </SubtitleMain>
+        <SubtitleAbout>
+          Здесь Вы можете <SelectSentence>делится</SelectSentence> образовательными ресурсами, видеороликами, анализомами и многим другим
+        </SubtitleAbout>
+      </ContainerTitles>
+
+      <ContainerImages>
+        <ImageStatistic src={(statistic as unknown as string)} />
+        <ImageGroup src={(group as unknown as string)} />
+      </ContainerImages>
+    </SectionContents>
   )
 };
 
