@@ -2,6 +2,9 @@ import { useMutation } from '@tanstack/react-query';
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import strapi from '../../../services/strapi';
+import { useDispatch } from 'react-redux';
+
+import { setUserInfo } from '../../../redux/slices/user';
 
 const Section = styled.section`
 	width: 520px;
@@ -69,62 +72,73 @@ const Title = styled.h3`
 `;
 
 const LoginPage: FC = () => {
-	const [formData, setFormData] = useState<{ email: string; password: string }>({
-		email: '',
-		password: '',
-	});
+    const [formData, setFormData] = useState<{ username: string; password: string }>({
+        username: '',
+        password: '',
+    });
+    const dispatch = useDispatch();
 
-	const { mutate, data, isPending } = useMutation({
-		mutationKey: ['login'],
-		mutationFn: async ({ email, password }: { email: string; password: string }) => {
-			return await strapi.login({ identifier: email, password });
-		},
-		onSuccess: data => {
-			// dispatch data to redux
-			console.log(data);
-			// redirect('/login');
-		},
-		onError: response => {
-			console.log(response);
-		},
-	});
+    const { mutate, data, isPending } = useMutation({
+        mutationKey: ['login'],
+        mutationFn: async ({ username, password }: { username: string; password: string }) => {
+            return await strapi.login({ identifier: username, password });
+        },
+        onSuccess: data => {
+            // dispatch data to redux
+            const {
+                data:
+                { login:
+                    { jwt, user }
+                }
+            } = data;
 
-	const handlerOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setFormData(prevState => ({
-			...prevState,
-			[event.target.name]: event.target.value,
-		}));
-	};
+            localStorage.setItem("token", jwt);
 
-	const handlerOnSubmit = (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		mutate(formData);
-	};
+            if (Object.keys(data).length !== 0) {
+                dispatch(setUserInfo({ jwt, user }))
+            }
+        },
+        onError: response => {
+            console.log(response);
+        },
+    });
 
-	return (
-		<Section>
-			<Title>Авторизация</Title>
-			<Form onSubmit={handlerOnSubmit}>
-				<Input
-					type='text'
-					name='email'
-					placeholder='E-mail'
-					value={formData.email}
-					onChange={handlerOnChange}
-				/>
-				<Input
-					type='password'
-					name='password'
-					placeholder='Пароль'
-					value={formData.password}
-					onChange={handlerOnChange}
-				/>
-				<Button type='submit' disabled={isPending}>
-					Войти
-				</Button>
-			</Form>
-		</Section>
-	);
+    const handlerOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setFormData(prevState => ({
+            ...prevState,
+            [event.target.name]: event.target.value,
+        }));
+    };
+
+    const handlerOnSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        mutate(formData);
+    };
+
+    return (
+        <Section>
+            <Title>Авторизация</Title>
+            <Form onSubmit={handlerOnSubmit}>
+                <Input
+                    type='text'
+                    name='username'
+                    placeholder='Имя пользователя'
+                    value={formData.username}
+                    onChange={handlerOnChange}
+                />
+                <Input
+                    type='password'
+                    name='password'
+                    placeholder='Пароль'
+                    value={formData.password}
+                    onChange={handlerOnChange}
+                />
+                <Button type='submit' disabled={isPending}>
+                    Войти
+                </Button>
+            </Form>
+        </Section>
+    );
 };
 
 export default LoginPage;

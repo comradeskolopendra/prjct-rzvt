@@ -52,6 +52,9 @@ export interface Pagination {
 	pageCount: number;
 }
 
+
+
+
 // auth
 export interface Auth {
 	data: Data;
@@ -67,6 +70,6 @@ export interface Login {
 }
 
 export interface User {
-	id: string;
+	id: string | number | null;
 	username: string;
 }

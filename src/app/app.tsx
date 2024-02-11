@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router';
 import { routerLinks } from '../router-config';
 
 import '../index.css';
+import WithProtected from '../HOCs/withProtected';
 
 function App() {
 	return (
@@ -13,7 +14,7 @@ function App() {
 			<Header links={routerLinks} />
 			<div className='wrapper'>
 				<Routes>
-					<Route path={'/'} index element={<MainPage />} />
+					<Route path={'/'} index element={<WithProtected component={<MainPage />} />} />
 					<Route path={'/about-project'} element={<AboutProject />} />
 					<Route path={'/auth'}>
 						<Route index path={'login'} element={<LoginPage />} />
