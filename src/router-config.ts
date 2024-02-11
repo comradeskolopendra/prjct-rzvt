@@ -1,6 +1,3 @@
-import { FC } from "react";
-import { MainPage } from "./pages";
-
 interface IRoute {
     to: string;
     title: string;
@@ -18,5 +15,9 @@ export const routerLinks: IRoute[] = [
     {
         to: "/about-project",
         title: "О Проекте"
+    },
+    {
+        to: "/contents",
+        title: "Лента"
     }
 ]
