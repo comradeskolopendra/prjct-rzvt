@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { CustomNavLink } from "./link";
+import { CustomLink } from "../link/link";
 
 interface IHeaderProps {
     links: {
@@ -17,7 +17,7 @@ const Nav = styled.nav`
 `
 
 const StyledHeader = styled.header`
-    width: 100vw;
+    width: 100%;
     padding: 20px 0;
     background: rgba(0,0,0,.5);
     box-shadow: 0px 17px 27px 10px rgba(0, 0, 0, 0.5);
@@ -26,6 +26,7 @@ const StyledHeader = styled.header`
     backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
+    z-index: 2;
 `
 
 const Header: FC<IHeaderProps> = ({ links }) => {
@@ -34,9 +35,9 @@ const Header: FC<IHeaderProps> = ({ links }) => {
             <Nav>
                 {
                     links.map(link => (
-                        <CustomNavLink key={link.to} to={link.to}>
+                        <CustomLink key={link.to} to={link.to}>
                             {link.title}
-                        </CustomNavLink>
+                        </CustomLink>
                     ))
                 }
             </Nav>

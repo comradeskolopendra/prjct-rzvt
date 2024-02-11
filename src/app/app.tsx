@@ -1,5 +1,5 @@
 import Header from '../components/header/header';
-import { AboutProject, LoginPage, MainPage, RegsiterPage } from '../pages';
+import { AboutProject, LoginPage, MainPage, RegsiterPage, ContentsPage } from '../pages';
 
 import { Route, Routes } from 'react-router';
 
@@ -14,8 +14,9 @@ function App() {
 			<Header links={routerLinks} />
 			<div className='wrapper'>
 				<Routes>
-					<Route path={'/'} index element={<WithProtected component={<MainPage />} />} />
+					<Route path={'/'} index element={<MainPage />} />
 					<Route path={'/about-project'} element={<AboutProject />} />
+					<Route path={"/contents"} element={<WithProtected component={<ContentsPage />} />} />
 					<Route path={'/auth'}>
 						<Route index path={'login'} element={<LoginPage />} />
 						<Route path={'register'} element={<RegsiterPage />} />

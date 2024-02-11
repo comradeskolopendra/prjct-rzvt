@@ -1,75 +1,12 @@
-import { useMutation } from '@tanstack/react-query';
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
-import styled from 'styled-components';
-import strapi from '../../../services/strapi';
+import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
+import { CustomLink } from '../../../components/link/link';
 
+import strapi from '../../../services/strapi';
 import { setUserInfo } from '../../../redux/slices/user';
 
-const Section = styled.section`
-	width: 520px;
-	height: auto;
-	min-height: 150px;
-	padding: 25px 0;
-	margin: 50px auto 0 auto;
-	border-radius: 12px;
-	backdrop-filter: blur(10px);
-	background: #0000005a;
-	border: 1px solid rgba(255, 255, 255, 0.5);
-`;
-
-const Form = styled.form`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-`;
-
-const Input = styled.input`
-	padding: 15px 15px;
-	box-sizing: border-box;
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	background: transparent;
-	color: white;
-	border-radius: 8px;
-	width: 100%;
-	max-width: 320px;
-	margin-bottom: 15px;
-
-	&:active,
-	&:focus {
-		outline: none;
-	}
-`;
-
-const Button = styled.button`
-	background-color: transparent;
-	border: 1px solid white;
-	color: white;
-	border-radius: 8px;
-	width: 100%;
-	padding: 15px;
-	box-sizing: border-box;
-	max-width: 320px;
-	font-family: 'Open Sans', sans-serif;
-	transition: all 0.3s ease-in-out;
-	cursor: pointer;
-
-	&:hover {
-		color: black;
-		background: white;
-		transition: all 0.3s ease-in-out;
-	}
-`;
-
-const Title = styled.h3`
-	margin-top: 0;
-	margin-bottom: 10px;
-	color: white;
-	font-size: 36px;
-	text-align: center;
-	font-weight: 300;
-`;
+import { Input, Button, Title, Form, Section } from '../components';
 
 const LoginPage: FC = () => {
     const [formData, setFormData] = useState<{ username: string; password: string }>({
@@ -84,7 +21,6 @@ const LoginPage: FC = () => {
             return await strapi.login({ identifier: username, password });
         },
         onSuccess: data => {
-            // dispatch data to redux
             const {
                 data:
                 { login:
@@ -136,6 +72,10 @@ const LoginPage: FC = () => {
                 <Button type='submit' disabled={isPending}>
                     Войти
                 </Button>
+
+                <CustomLink style={{ marginTop: "15px" }} to={"/auth/register"}>
+                    Зарегистрироваться
+                </CustomLink>
             </Form>
         </Section>
     );

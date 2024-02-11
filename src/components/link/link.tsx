@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-export const CustomNavLink = styled(NavLink)`
+export const CustomLink = styled(NavLink)`
     color: white;
     text-decoration: none;
     font-weight: 500;
     font-size: 20px;
     margin: 0 15px;
     position: relative;
+    z-index: 1;
 
     &::after {
         content: "";

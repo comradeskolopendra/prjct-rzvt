@@ -4,70 +4,8 @@ import { redirect } from 'react-router';
 import styled from 'styled-components';
 import strapi from '../../../services/strapi';
 
-const Section = styled.section`
-	width: 520px;
-	height: auto;
-	min-height: 150px;
-	padding: 25px 0;
-	margin: 50px auto 0 auto;
-	border-radius: 12px;
-	backdrop-filter: blur(10px);
-	background: #0000005a;
-	border: 1px solid rgba(255, 255, 255, 0.5);
-`;
-
-const Form = styled.form`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-`;
-
-const Input = styled.input`
-	padding: 15px 15px;
-	box-sizing: border-box;
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	background: transparent;
-	color: white;
-	border-radius: 8px;
-	width: 100%;
-	max-width: 320px;
-	margin-bottom: 15px;
-
-	&:active,
-	&:focus {
-		outline: none;
-	}
-`;
-
-const Button = styled.button`
-	background-color: transparent;
-	border: 1px solid white;
-	color: white;
-	border-radius: 8px;
-	width: 100%;
-	padding: 15px;
-	box-sizing: border-box;
-	max-width: 320px;
-	font-family: 'Open Sans', sans-serif;
-	transition: all 0.3s ease-in-out;
-	cursor: pointer;
-
-	&:hover {
-		color: black;
-		background: white;
-		transition: all 0.3s ease-in-out;
-	}
-`;
-
-const Title = styled.h3`
-	margin-top: 0;
-	margin-bottom: 10px;
-	color: white;
-	font-size: 36px;
-	text-align: center;
-	font-weight: 300;
-`;
+import { Input, Button, Title, Form, Section } from '../components';
+import { CustomLink } from '../../../components/link/link';
 
 const RegsiterPage: FC = () => {
 	const [formData, setFormData] = useState<{ email: string; password: string; username: string }>(
@@ -137,6 +75,10 @@ const RegsiterPage: FC = () => {
 				<Button type='submit' disabled={isPending}>
 					Регистрация
 				</Button>
+
+				<CustomLink style={{ marginTop: "15px" }} to={"/auth/login"}>
+					Есть аккаунт?
+				</CustomLink>
 			</Form>
 		</Section>
 	);
