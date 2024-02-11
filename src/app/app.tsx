@@ -8,17 +8,17 @@ import { routerLinks } from "../router-config";
 import "../index.css";
 
 function App() {
-  return (
-    <div className="app">
-      <Header links={routerLinks} />
-      <div className="wrapper">
-        <Routes>
-          <Route path={"/"} index element={<MainPage />} />
-          <Route path={"/about-project"} element={<AboutProject />} />
-        </Routes>
-      </div>
-    </div>
-  )
+	return (
+		<div className="app">
+			<Header links={routerLinks} />
+			<div className="wrapper">
+				<Routes>
+					<Route path={"/"} index element={<MainPage />} />
+					<Route path={"/about-project"} element={<AboutProject />} />
+				</Routes>
+			</div>
+		</div>
+	)
 }
 
-export default App
+export default App;
