@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { GetThemes } from '.';
-import { getThemesGql, loginGql, registerGql } from './gql';
+import { authMeGql, getThemesGql, loginGql, registerGql } from './gql';
 
 class Strapi {
-	private URL = import.meta.env.VITE_STRAPI_API;
 	private GRAPHQL = import.meta.env.VITE_STRAPI_GRAPHQL;
 	private TOKEN = import.meta.env.VITE_STRAPI_DEV_TOKEN;
 
@@ -45,6 +44,17 @@ class Strapi {
 	}) {
 		const { data } = await axios.post<GetThemes>(`${this.GRAPHQL}`, {
 			query: registerGql({ username, email, password }),
+		});
+
+		return data;
+	}
+
+	async authMe({ jwt }: { jwt: string }) {
+		const { data } = await axios.post<any>(`${this.GRAPHQL}`, {
+			query: authMeGql,
+			Headers: {
+				Authorization: `Bearer ${jwt}`,
+			},
 		});
 
 		return data;
