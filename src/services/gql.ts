@@ -59,6 +59,41 @@ export const getThemesGql = ({
 }`;
 };
 
+export const getThemeGql = (id: number) => {
+	return `query {
+		theme (id:"${id}") {
+			data {
+				id
+				attributes {
+					title
+					markdown
+					isConfirmed
+					createdAt
+					updatedAt
+					media {
+					data {
+						id
+						attributes {
+							name
+							size
+							url
+						}
+					}
+				}
+				user {
+					data {
+						attributes {
+							username
+							avatar {data {attributes {url}}}
+						}
+					}
+				}
+			}
+		}
+	}
+}`;
+};
+
 /*
  * auth
  * block
