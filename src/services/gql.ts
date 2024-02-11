@@ -97,3 +97,11 @@ export const registerGql = ({
 		}
 	}`;
 };
+
+export const authMeGql = `query {
+	me {
+		id
+		username
+		email
+	}
+}`;
