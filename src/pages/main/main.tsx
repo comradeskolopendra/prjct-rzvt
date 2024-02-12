@@ -1,12 +1,15 @@
 import {
   SectionContents,
   ContainerTitles,
-  ContainerBlocks,
+  SectionBlocks,
   TitleMain,
   SubtitleMain,
   SubtitleAbout,
-  AnimationSentence
+  AnimationSentence,
+  ContainerBlock
 } from "./components";
+
+import { DevIcon, HeadhunterIcon, DesignIcon, AnalyzeIcon } from "./icons/icons";
 
 const MainPage = () => {
 
@@ -14,7 +17,7 @@ const MainPage = () => {
     <SectionContents>
       <ContainerTitles>
         <TitleMain>
-          Сбер.Соц
+          Сбер.Инфо
         </TitleMain>
         <SubtitleMain>
           Поделись знаниями с ближним своим!
@@ -22,14 +25,26 @@ const MainPage = () => {
         <SubtitleAbout>
           Здесь Вы можете
           <AnimationSentence>
-            делится
+            &nbsp; делится &nbsp;
           </AnimationSentence>
           образовательными ресурсами, видеороликами, анализомами и многим другим
         </SubtitleAbout>
       </ContainerTitles>
 
-      <ContainerBlocks>
-      </ContainerBlocks>
+      <SectionBlocks>
+        <ContainerBlock>
+          <DevIcon />
+        </ContainerBlock>
+        <ContainerBlock>
+          <AnalyzeIcon />
+        </ContainerBlock>
+        <ContainerBlock>
+          <HeadhunterIcon />
+        </ContainerBlock>
+        <ContainerBlock>
+          <DesignIcon />
+        </ContainerBlock>
+      </SectionBlocks>
     </SectionContents>
   )
 };
