@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ContainerBlock = styled.div`
+export const ContainerBlock = styled.div<{ $randomColor: string }>`
     width: 250px;
     height: 250px;
     color: white;
@@ -17,6 +17,14 @@ export const ContainerBlock = styled.div`
         transform: scale(1.05);
         transition: all 0.3s ease-in-out;
         background: #69697c;
+
+        svg {
+            color: ${props => props.$randomColor};
+
+            rect {
+                stroke: ${props => props.$randomColor};
+            }
+        }
     }
 
     &:active {

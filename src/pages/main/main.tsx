@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   SectionContents,
   ContainerTitles,
@@ -8,16 +9,15 @@ import {
   AnimationSentence,
   ContainerBlock
 } from "./components";
-
-import { DevIcon, HeadhunterIcon, DesignIcon, AnalyzeIcon } from "./icons/icons";
+import { COURSES } from "./constants/courses-config";
+import { getRandomColor } from "../../services/helpers";
 
 const MainPage = () => {
-
   return (
     <SectionContents>
       <ContainerTitles>
         <TitleMain>
-          Сбер.Инфо
+          Пркт.Развитие
         </TitleMain>
         <SubtitleMain>
           Поделись знаниями с ближним своим!
@@ -32,18 +32,15 @@ const MainPage = () => {
       </ContainerTitles>
 
       <SectionBlocks>
-        <ContainerBlock>
-          <DevIcon />
-        </ContainerBlock>
-        <ContainerBlock>
-          <AnalyzeIcon />
-        </ContainerBlock>
-        <ContainerBlock>
-          <HeadhunterIcon />
-        </ContainerBlock>
-        <ContainerBlock>
-          <DesignIcon />
-        </ContainerBlock>
+        {
+          COURSES.map(course => (
+            <Link key={course.altName} to={`/courses/${course.to}`}>
+              <ContainerBlock $randomColor={getRandomColor()}>
+                {course.icon}
+              </ContainerBlock>
+            </Link>
+          ))
+        }
       </SectionBlocks>
     </SectionContents>
   )

@@ -7,6 +7,7 @@ import { routerLinks } from '../router-config';
 
 import '../index.css';
 import WithProtected from '../HOCs/withProtected';
+import Course from '../pages/course/course';
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 						<Route index path={'login'} element={<LoginPage />} />
 						<Route path={'register'} element={<RegsiterPage />} />
 					</Route>
+					<Route path='/courses/:department' element={<Course />} />
 				</Routes>
 			</div>
 		</div>

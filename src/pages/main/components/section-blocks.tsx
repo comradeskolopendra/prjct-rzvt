@@ -8,5 +8,7 @@ export const SectionBlocks = styled.section`
   grid-template-rows: 250px 250px;
   column-gap: 15px;
   row-gap: 15px;
-  justify-content: flex-end;
+  justify-content: center;
+  margin-left: 50px;
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, transparent 50%);
 `
