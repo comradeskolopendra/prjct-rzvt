@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ContainerBlock = styled.div<{ $randomColor: string }>`
+export const ContainerBlock = styled.div<{ $randomColor?: string }>`
     width: 250px;
     height: 250px;
     color: white;
