@@ -1,16 +1,16 @@
-import { FC, ReactNode, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { FC, ReactNode, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 const WithProtected: FC<{ component: ReactNode }> = ({ component }) => {
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!localStorage.getItem("token")) {
-            navigate("/auth/login");
-        }
-    }, [localStorage.getItem("token")])
+	useEffect(() => {
+		if (!localStorage.getItem('token')) {
+			navigate('/auth/login');
+		}
+	}, [localStorage.getItem('token')]);
 
-    return component;
+	return component;
 };
 
 export default WithProtected;

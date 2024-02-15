@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { Auth, GetThemes } from '.';
-import { getThemesGql, loginGql, registerGql, authMeGql } from './gql';
+import { authMeGql, getThemeGql, getThemesGql, loginGql, registerGql } from './gql';
 
 class Strapi {
 	private GRAPHQL = import.meta.env.VITE_STRAPI_GRAPHQL;
 	private TOKEN = import.meta.env.VITE_STRAPI_DEV_TOKEN;
 
+	// themes
 	async getThemes({
 		page = 1,
 		pageSize = 10,
@@ -25,6 +26,18 @@ class Strapi {
 		return data;
 	}
 
+	async getTheme(id: number) {
+		const { data } = await axios.post<GetThemes>(`${this.GRAPHQL}`, {
+			query: getThemeGql(id),
+			Headers: {
+				Authorization: `Bearer ${this.TOKEN}`,
+			},
+		});
+
+		return data;
+	}
+
+	// auth
 	async login({ identifier, password }: { identifier: string; password: string }) {
 		const { data } = await axios.post<Auth>(`${this.GRAPHQL}`, {
 			query: loginGql({ identifier, password }),
