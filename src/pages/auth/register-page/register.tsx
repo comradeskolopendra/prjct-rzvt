@@ -19,7 +19,7 @@ const RegsiterPage: FC = () => {
 	const onSubmit: SubmitHandler<IFormValues> = async ({ email, password }) => {
 		await createUserWithEmailAndPassword(auth, email, password).then((userCred) => {
 			console.log(`user: ${userCred.user} is registered`);
-		})
+		}).catch(error => console.log(error.code))
 	};
 
 	return (
