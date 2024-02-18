@@ -6,6 +6,7 @@ import { SubtitleAbout } from "./subtitle-about";
 import { SubtitleMain } from "./subtitle-main";
 import { TitleMain } from "./title-main";
 import { ContainerBlock } from "./container-block";
+import { ScrollWatcher } from "./scroll-watcher";
 
 export {
     SectionBlocks,
@@ -15,5 +16,6 @@ export {
     AnimationSentence,
     SubtitleAbout,
     SubtitleMain,
-    TitleMain
+    TitleMain,
+    ScrollWatcher
 }

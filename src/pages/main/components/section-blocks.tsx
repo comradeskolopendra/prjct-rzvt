@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const SectionBlocks = styled.section`
   position: relative;
-  width: 50%;
+  width: 100%;
   display: grid;
   grid-template-columns: 250px 250px;
   grid-template-rows: 250px 250px;

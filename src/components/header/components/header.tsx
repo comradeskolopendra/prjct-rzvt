@@ -9,4 +9,6 @@ export const StyledHeader = styled.header`
     position: sticky;
     top: 0;
     z-index: 2;
+    display: flex;
+    justify-content: space-between;
 `

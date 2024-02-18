@@ -7,15 +7,35 @@ import {
   SubtitleMain,
   SubtitleAbout,
   AnimationSentence,
-  ContainerBlock
+  ContainerBlock,
+  ScrollWatcher
 } from "./components";
 import { COURSES } from "./constants/courses-config";
 import { getRandomColor } from "../../services/helpers";
+import { motion, useScroll } from "framer-motion";
 
 const MainPage = () => {
+  const { scrollYProgress } = useScroll();
+
   return (
     <SectionContents>
-      <ContainerTitles>
+      {/* <ScrollWatcher style={{ scaleX: scrollYProgress }} /> */}
+      <motion.div
+        initial={{
+          opacity: 0,
+          translateX: -200,
+        }}
+
+        animate={{
+          translateX: 0,
+          opacity: 1
+        }}
+
+        transition={{
+          type: "spring",
+          duration: 0.5
+        }}
+      >
         <TitleMain>
           Пркт.Развитие
         </TitleMain>
@@ -29,20 +49,35 @@ const MainPage = () => {
           </AnimationSentence>
           образовательными ресурсами, видеороликами, анализомами и многим другим
         </SubtitleAbout>
-      </ContainerTitles>
+      </motion.div>
 
-      <SectionBlocks>
-        {
-          COURSES.map(course => (
-            <Link key={course.altName} to={`/courses/${course.to}`}>
-              <ContainerBlock $randomColor={getRandomColor()}>
-                {course.icon}
-              </ContainerBlock>
-            </Link>
-          ))
-        }
-      </SectionBlocks>
-    </SectionContents>
+      <motion.div
+        initial={{
+          opacity: 0,
+          scale: 0.5
+        }}
+        animate={{
+          opacity: 1,
+          scale: 1
+        }}
+        transition={{
+          type: "spring",
+          duration: 0.5
+        }}
+      >
+        <SectionBlocks>
+          {
+            COURSES.map(course => (
+              <Link key={course.altName} to={`/courses/${course.to}`}>
+                <ContainerBlock $randomColor={getRandomColor()}>
+                  {course.icon}
+                </ContainerBlock>
+              </Link>
+            ))
+          }
+        </SectionBlocks>
+      </motion.div>
+    </SectionContents >
   )
 };
 

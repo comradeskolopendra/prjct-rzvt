@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { StyledHeader, HeaderNav } from "./components";
+import logo from "../../assets/images/logo.jpg";
 import { CustomLink } from "../link/link";
 
 interface IHeaderProps {
@@ -21,7 +22,7 @@ const Header: FC<IHeaderProps> = ({ links }) => {
                     ))
                 }
             </HeaderNav>
-        </StyledHeader>
+        </StyledHeader >
     )
 }
 
