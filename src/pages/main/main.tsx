@@ -1,25 +1,21 @@
 import { Link } from "react-router-dom";
 import {
   SectionContents,
-  ContainerTitles,
   SectionBlocks,
   TitleMain,
   SubtitleMain,
   SubtitleAbout,
   AnimationSentence,
   ContainerBlock,
-  ScrollWatcher
 } from "./components";
 import { COURSES } from "./constants/courses-config";
 import { getRandomColor } from "../../services/helpers";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 
 const MainPage = () => {
-  const { scrollYProgress } = useScroll();
 
   return (
     <SectionContents>
-      {/* <ScrollWatcher style={{ scaleX: scrollYProgress }} /> */}
       <motion.div
         initial={{
           opacity: 0,
@@ -33,7 +29,7 @@ const MainPage = () => {
 
         transition={{
           type: "spring",
-          duration: 0.5
+          duration: 1
         }}
       >
         <TitleMain>
@@ -62,7 +58,7 @@ const MainPage = () => {
         }}
         transition={{
           type: "spring",
-          duration: 0.5
+          duration: 1
         }}
       >
         <SectionBlocks>
