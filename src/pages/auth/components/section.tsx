@@ -7,7 +7,4 @@ export const Section = styled.section`
 	padding: 25px 0;
 	margin: 50px auto 0 auto;
 	border-radius: 12px;
-	backdrop-filter: blur(10px);
-	background: #0000005a;
-	border: 1px solid rgba(255, 255, 255, 0.5);
 `;

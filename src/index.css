@@ -3,6 +3,11 @@
     src: url(./assets/fonts/OpenSans.ttf);
 }
 
+@font-face {
+    font-family: "Fredoka";
+    src: url(./assets/fonts/Fredoka.ttf);
+}
+
 body {
     margin: 0;
     background: #131316;

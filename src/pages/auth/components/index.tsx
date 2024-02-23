@@ -1,13 +1,15 @@
-import { Input } from "./input";
+import { ValidatedInput } from "./input";
 import { Button } from "./button";
 import { Title } from "./title";
-import { Form } from "react-router-dom";
+import { Form } from "./form"
 import { Section } from "./section";
+import { RegisterLink } from "./link-register";
 
 export {
-    Input,
+    ValidatedInput,
     Button,
     Title,
     Form,
-    Section
+    Section,
+    RegisterLink
 }

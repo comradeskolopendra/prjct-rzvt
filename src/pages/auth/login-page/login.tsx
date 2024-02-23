@@ -1,81 +1,41 @@
-import { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
-import { CustomLink } from '../../../components/link/link';
+import { FC } from 'react';
 
-import strapi from '../../../services/strapi';
 import { setUserInfo } from '../../../redux/slices/user';
 
-import { Input, Button, Title, Form, Section } from '../components';
+import { ValidatedInput, Button, Title, Form, Section, RegisterLink } from '../components';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import type { IFormValues } from '../interfaces';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../firebase';
+
 
 const LoginPage: FC = () => {
-    const [formData, setFormData] = useState<{ username: string; password: string }>({
-        username: '',
-        password: '',
-    });
-    const dispatch = useDispatch();
-
-    const { mutate, data, isPending } = useMutation({
-        mutationKey: ['login'],
-        mutationFn: async ({ username, password }: { username: string; password: string }) => {
-            return await strapi.login({ identifier: username, password });
+    const { register, handleSubmit, formState: { errors } } = useForm<IFormValues>({
+        defaultValues: {
+            email: "",
+            password: ""
         },
-        onSuccess: data => {
-            const {
-                data:
-                { login:
-                    { jwt, user }
-                }
-            } = data;
+    })
 
-            localStorage.setItem("token", jwt);
-
-            if (Object.keys(data).length !== 0) {
-                dispatch(setUserInfo({ jwt, user }))
-            }
-        },
-        onError: response => {
-            console.log(response);
-        },
-    });
-
-    const handlerOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setFormData(prevState => ({
-            ...prevState,
-            [event.target.name]: event.target.value,
-        }));
-    };
-
-    const handlerOnSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        mutate(formData);
-    };
+    const onSubmit: SubmitHandler<IFormValues> = async ({ email, password }) => {
+        await signInWithEmailAndPassword(auth, email, password).then((userCred) => {
+            console.log(`user: ${userCred.user} is logined`);
+        })
+    }
 
     return (
         <Section>
-            <Title>Авторизация</Title>
-            <Form onSubmit={handlerOnSubmit}>
-                <Input
-                    type='text'
-                    name='username'
-                    placeholder='Имя пользователя'
-                    value={formData.username}
-                    onChange={handlerOnChange}
-                />
-                <Input
-                    type='password'
-                    name='password'
-                    placeholder='Пароль'
-                    value={formData.password}
-                    onChange={handlerOnChange}
-                />
-                <Button type='submit' disabled={isPending}>
+            <Title>Вход</Title>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+                <ValidatedInput register={register} type='email' registerlabel='email' inputLabel='E-mail' errors={errors} />
+                <ValidatedInput register={register} type='password' registerlabel='password' inputLabel='Пароль' errors={errors} />
+                <Button type='submit'>
                     Войти
                 </Button>
 
-                <CustomLink style={{ marginTop: "15px" }} to={"/auth/register"}>
+                <RegisterLink to={"/auth/register"}>
                     Зарегистрироваться
-                </CustomLink>
+                </RegisterLink>
             </Form>
         </Section>
     );

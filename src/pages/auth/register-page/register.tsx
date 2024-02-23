@@ -1,84 +1,41 @@
-import { useMutation } from '@tanstack/react-query';
-import { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { redirect } from 'react-router';
-import styled from 'styled-components';
-import strapi from '../../../services/strapi';
+import { FC } from 'react';
 
-import { Input, Button, Title, Form, Section } from '../components';
-import { CustomLink } from '../../../components/link/link';
+import { ValidatedInput, Button, Title, Form, Section, RegisterLink } from '../components';
+
+import { useForm, SubmitHandler } from 'react-hook-form';
+
+import type { IFormValues } from '../interfaces';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../firebase';
 
 const RegsiterPage: FC = () => {
-	const [formData, setFormData] = useState<{ email: string; password: string; username: string }>(
-		{ email: '', password: '', username: '' }
-	);
+	const { register, handleSubmit, formState: { errors } } = useForm<IFormValues>({
+		defaultValues: {
+			email: "",
+			password: ""
+		}
+	})
 
-	const { mutate, data, isPending } = useMutation({
-		mutationKey: ['register'],
-		mutationFn: async ({
-			email,
-			password,
-			username,
-		}: {
-			email: string;
-			password: string;
-			username: string;
-		}) => {
-			return await strapi.register({ email, password, username });
-		},
-		onSuccess: () => {
-			// dispatch data to redux
-
-			redirect('/login');
-		},
-		onError: response => {
-			console.log(response);
-		},
-	});
-
-	const handlerOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setFormData(prevState => ({
-			...prevState,
-			[event.target.name]: event.target.value,
-		}));
-	};
-
-	const handlerOnSubmit = (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		mutate(formData);
+	const onSubmit: SubmitHandler<IFormValues> = async ({ email, password }) => {
+		await createUserWithEmailAndPassword(auth, email, password).then((userCred) => {
+			console.log(`user: ${userCred.user} is registered`);
+		}).catch(error => console.log(error.code))
 	};
 
 	return (
 		<Section>
 			<Title>Регистрация</Title>
-			<Form onSubmit={handlerOnSubmit}>
-				<Input
-					type='email'
-					name='email'
-					placeholder='E-mail'
-					value={formData.email}
-					onChange={handlerOnChange}
-				/>
-				<Input
-					type='text'
-					name='username'
-					placeholder='Имя пользователя'
-					value={formData.username}
-					onChange={handlerOnChange}
-				/>
-				<Input
-					type='password'
-					name='password'
-					placeholder='Пароль'
-					value={formData.password}
-					onChange={handlerOnChange}
-				/>
-				<Button type='submit' disabled={isPending}>
+			<Form onSubmit={handleSubmit(onSubmit)}>
+				<ValidatedInput register={register} type='email' registerlabel='email' inputLabel='E-mail' errors={errors} />
+				<ValidatedInput register={register} type='password' registerlabel='password' inputLabel='Пароль' errors={errors} />
+
+				<Button type='submit'>
 					Регистрация
 				</Button>
 
-				<CustomLink style={{ marginTop: "15px" }} to={"/auth/login"}>
+				<RegisterLink to={"/auth/login"}>
 					Есть аккаунт?
-				</CustomLink>
+				</RegisterLink>
 			</Form>
 		</Section>
 	);

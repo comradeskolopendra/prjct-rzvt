@@ -9,7 +9,6 @@ import {
   ContainerBlock,
 } from "./components";
 import { COURSES } from "./constants/courses-config";
-import { getRandomColor } from "../../services/helpers";
 import { motion } from "framer-motion";
 
 const MainPage = () => {
@@ -65,7 +64,7 @@ const MainPage = () => {
           {
             COURSES.map(course => (
               <Link key={course.altName} to={`/courses/${course.to}`}>
-                <ContainerBlock $randomColor={getRandomColor()}>
+                <ContainerBlock>
                   {course.icon}
                 </ContainerBlock>
               </Link>
